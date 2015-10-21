@@ -4,62 +4,26 @@ package eu.organicity.discovery.model;
  * Created by amaxilatis on 20/10/2015.
  */
 public class DataLocation {
-    private String ip;
-    private String exposure;
-    private int elevation;
-    private String latitude;
-    private String longitude;
-    private String geohash;
+    private double latitude;
+    private double longitude;
     private String city;
     private String country_code;
     private String country;
 
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public String getExposure() {
-        return exposure;
-    }
-
-    public void setExposure(String exposure) {
-        this.exposure = exposure;
-    }
-
-    public int getElevation() {
-        return elevation;
-    }
-
-    public void setElevation(int elevation) {
-        this.elevation = elevation;
-    }
-
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
-    }
-
-    public String getGeohash() {
-        return geohash;
-    }
-
-    public void setGeohash(String geohash) {
-        this.geohash = geohash;
     }
 
     public String getCity() {
@@ -84,5 +48,16 @@ public class DataLocation {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "DataLocation{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", city='" + city + '\'' +
+                ", country_code='" + country_code + '\'' +
+                ", country='" + country + '\'' +
+                '}';
     }
 }

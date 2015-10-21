@@ -1,5 +1,6 @@
 package eu.organicity.discovery.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +15,20 @@ public class DeviceOwner {
     private String joined_at;
     private Location location;
     private List<Integer> device_ids;
+
+    public DeviceOwner() {
+    }
+
+    public DeviceOwner(int id, String uuid, String username, String avatar, String url, String joined_at, Location location) {
+        this.id = id;
+        this.uuid = uuid;
+        this.username = username;
+        this.avatar = avatar;
+        this.url = url;
+        this.joined_at = joined_at;
+        this.location = location;
+        this.device_ids = new ArrayList<Integer>();
+    }
 
     public int getId() {
         return id;

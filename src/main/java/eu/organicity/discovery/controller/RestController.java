@@ -26,7 +26,7 @@ public class RestController {
     OrionService orionService;
 
     @ResponseBody
-    @RequestMapping(value = "/v1/devices", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/v1/entities", method = RequestMethod.GET, produces = "application/json")
     public List<Device> getDevices() {
         return orionService.getDevices();
     }

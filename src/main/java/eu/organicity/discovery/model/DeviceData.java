@@ -1,5 +1,6 @@
 package eu.organicity.discovery.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,9 +8,12 @@ import java.util.List;
  */
 public class DeviceData {
     private String recorded_at;
-    private String added_at;
     private DataLocation location;
-    private List<DeviceSensor> sensors;
+    private List<DeviceSensor> atttributes;
+
+    public DeviceData() {
+        this.atttributes = new ArrayList<DeviceSensor>();
+    }
 
     public String getRecorded_at() {
         return recorded_at;
@@ -17,14 +21,6 @@ public class DeviceData {
 
     public void setRecorded_at(String recorded_at) {
         this.recorded_at = recorded_at;
-    }
-
-    public String getAdded_at() {
-        return added_at;
-    }
-
-    public void setAdded_at(String added_at) {
-        this.added_at = added_at;
     }
 
     public DataLocation getLocation() {
@@ -35,11 +31,11 @@ public class DeviceData {
         this.location = location;
     }
 
-    public List<DeviceSensor> getSensors() {
-        return sensors;
+    public List<DeviceSensor> getAtttributes() {
+        return atttributes;
     }
 
-    public void setSensors(List<DeviceSensor> sensors) {
-        this.sensors = sensors;
+    public void setAtttributes(List<DeviceSensor> atttributes) {
+        this.atttributes = atttributes;
     }
 }

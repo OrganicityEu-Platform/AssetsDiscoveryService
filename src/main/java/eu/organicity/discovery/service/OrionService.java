@@ -36,7 +36,7 @@ public class OrionService {
 
     @PostConstruct
     public void init() {
-        orionClient = new OrionClient("http://localhost:1026", "");
+        orionClient = new OrionClient("http://195.220.224.231:1026", "");
         TimeZone tz = TimeZone.getTimeZone("UTC");
         df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
         df.setTimeZone(tz);

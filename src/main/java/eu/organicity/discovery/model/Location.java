@@ -8,6 +8,15 @@ public class Location {
     private String country;
     private String country_code;
 
+    public Location() {
+    }
+
+    public Location(String city, String country, String country_code) {
+        this.city = city;
+        this.country = country;
+        this.country_code = country_code;
+    }
+
     public String getCity() {
         return city;
     }

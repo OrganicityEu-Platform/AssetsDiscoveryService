@@ -7,18 +7,12 @@ package eu.organicity.discovery.model;
  */
 public class DeviceSensor {
     private int id;
-    private String ancestry;
     private String name;
-    private String description;
     private String unit;
-    private String created_at;
     private String updated_at;
-    private int measurement_id;
-    private String uuid;
-    private String value;
-    private String raw_value;
-    private String prev_value;
-    private String prev_raw_value;
+    private String metadata_id;
+    private double value;
+    private double prev_value;
 
     public int getId() {
         return id;
@@ -26,14 +20,6 @@ public class DeviceSensor {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getAncestry() {
-        return ancestry;
-    }
-
-    public void setAncestry(String ancestry) {
-        this.ancestry = ancestry;
     }
 
     public String getName() {
@@ -44,28 +30,12 @@ public class DeviceSensor {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getUnit() {
         return unit;
     }
 
     public void setUnit(String unit) {
         this.unit = unit;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
     }
 
     public String getUpdated_at() {
@@ -76,51 +46,40 @@ public class DeviceSensor {
         this.updated_at = updated_at;
     }
 
-    public int getMeasurement_id() {
-        return measurement_id;
+    public String getMetadata_id() {
+        return metadata_id;
     }
 
-    public void setMeasurement_id(int measurement_id) {
-        this.measurement_id = measurement_id;
+    public void setMetadata_id(String metadata_id) {
+        this.metadata_id = metadata_id;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
-    public String getRaw_value() {
-        return raw_value;
-    }
-
-    public void setRaw_value(String raw_value) {
-        this.raw_value = raw_value;
-    }
-
-    public String getPrev_value() {
+    public double getPrev_value() {
         return prev_value;
     }
 
-    public void setPrev_value(String prev_value) {
+    public void setPrev_value(double prev_value) {
         this.prev_value = prev_value;
     }
 
-    public String getPrev_raw_value() {
-        return prev_raw_value;
-    }
-
-    public void setPrev_raw_value(String prev_raw_value) {
-        this.prev_raw_value = prev_raw_value;
+    @Override
+    public String toString() {
+        return "DeviceSensor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", unit='" + unit + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                ", metadata_id='" + metadata_id + '\'' +
+                ", value=" + value +
+                ", prev_value=" + prev_value +
+                '}';
     }
 }
