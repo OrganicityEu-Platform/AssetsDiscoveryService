@@ -3,78 +3,64 @@ HOST: http://polls.apiblueprint.org/
 
 # Organicity Resource Directory API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Git the available resources for the 3 Organicity sites.
 
-## Questions Collection [/questions]
+## Get all entities registered in all Organicity sites [/v1/entities]
 
-### List All Questions [GET]
+### Get all entities availabe in the central resource directory [GET]
 
 + Response 200 (application/json)
-
+    
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                id: -659783864,
+                uuid: "urn:oc:entity:patras:weatherstation:fixed:-578724766",
+                name: "urn:oc:entity:patras:weatherstation:fixed:-578724766",
+                last_reading_at: "2015-10-22T09:40Z",
+                provider: {
+                    id: 0,
+                    uuid: "urn:oc:entity:patras",
+                    username: "Patras",
+                    avatar: "http://www.multistick.gr/files/images/dimos_patron.png",
+                    url: "http://cti.gr",
+                    joined_at: "",
+                    location: {
+                        city: "Patras",
+                        country: "Greece",
+                        country_code: "GR"
+                    },
+                    device_ids: [ ]
+                },
+                data: {
+                    recorded_at: "2015-10-22T09:40Z",
+                    location: {
+                        latitude: 0,
+                        longitude: 0,
+                        city: null,
+                        country_code: null,
+                        country: null
+                    },
+                    atttributes: [
+                        {
+                        id: 1303015757,
+                        name: "atmosphericPressure",
+                        unit: "bar",
+                        updated_at: "2015-10-22T09:40Z",
+                        metadata_id: "urn:oc:atributeType:atmosphericPressure",
+                        value: 0,
+                        prev_value: 0
+                        },
+                        {
+                        id: -1915843409,
+                        name: "rainfall",
+                        unit: "mililiterPerHour",
+                        updated_at: "2015-10-22T09:40Z",
+                        metadata_id: "urn:oc:attributeTypes:rainfall",
+                        value: 0,
+                        prev_value: 0
+                        }
+                    ]
+                },
+                entities_type: null
             }
         ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
