@@ -9,10 +9,10 @@ import java.util.List;
 public class DeviceData {
     private String recorded_at;
     private DataLocation location;
-    private List<DeviceSensor> atttributes;
+    private List<DeviceSensor> attributes;
 
     public DeviceData() {
-        this.atttributes = new ArrayList<DeviceSensor>();
+        this.attributes = new ArrayList<DeviceSensor>();
     }
 
     public String getRecorded_at() {
@@ -31,11 +31,11 @@ public class DeviceData {
         this.location = location;
     }
 
-    public List<DeviceSensor> getAtttributes() {
-        return atttributes;
+    public List<DeviceSensor> getAttributes() {
+        return attributes;
     }
 
-    public void setAtttributes(List<DeviceSensor> atttributes) {
-        this.atttributes = atttributes;
+    public void setAttributes(List<DeviceSensor> attributes) {
+        this.attributes = attributes;
     }
 }
