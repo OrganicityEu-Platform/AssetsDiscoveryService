@@ -1,11 +1,13 @@
 package eu.organicity.discovery.model;
 
+import java.io.Serializable;
+
 /**
  * Model for a SmartCitizen DeviceSensor Object.
  *
  * @author Dimitrios Amaxilatis
  */
-public class DeviceSensor {
+public class DeviceSensor implements Serializable {
     private int id;
     private String name;
     private String unit;

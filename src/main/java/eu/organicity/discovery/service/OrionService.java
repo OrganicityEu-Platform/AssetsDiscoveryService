@@ -3,6 +3,7 @@ package eu.organicity.discovery.service;
 import com.amaxilatis.orion.OrionClient;
 import com.amaxilatis.orion.model.ContextElementList;
 import com.amaxilatis.orion.model.OrionContextElementWrapper;
+import eu.organicity.discovery.cache.Cachable;
 import eu.organicity.discovery.model.Device;
 import eu.organicity.discovery.util.DeviceFactory;
 import org.apache.log4j.Logger;
@@ -36,12 +37,14 @@ public class OrionService {
 
     @PostConstruct
     public void init() {
-        orionClient = new OrionClient("http://195.220.224.231:1026", "");
+//        orionClient = new OrionClient("http://195.220.224.231:1026", "");
+        orionClient = new OrionClient("http://mu.tlmat.unican.es:8099", "");
         TimeZone tz = TimeZone.getTimeZone("UTC");
         df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
         df.setTimeZone(tz);
     }
 
+    @Cachable(cacheName = "entities")
     public List<Device> getDevices() {
         List<Device> resources = new ArrayList<Device>();
 

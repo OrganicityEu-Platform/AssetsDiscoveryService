@@ -17,17 +17,22 @@ public class DeviceFactory {
     private static final Logger LOGGER = Logger.getLogger(DeviceFactory.class);
 
     static DeviceOwner patras = new DeviceOwner(0, "urn:oc:entity:patras", "Patras", "http://www.multistick.gr/files/images/dimos_patron.png", "http://cti.gr", "", new Location("Patras", "Greece", "GR"));
+    static DeviceOwner london = new DeviceOwner(0, "urn:oc:entity:london", "London", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/London", "", new Location("London", "United Kingdom", "UK"));
+    static DeviceOwner santander= new DeviceOwner(0, "urn:oc:entity:santander", "Santander", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/Santander", "", new Location("Santandeer", "Span", "ES"));
 
     public static Device covert(OrionContextElement contextElement) {
         final Device device = new Device();
-        device.setId(contextElement.getId().hashCode());
+        device.setId(Math.abs(contextElement.getId().hashCode()));
         device.setUuid(contextElement.getId());
         device.setName(contextElement.getId());
         final DeviceData data = new DeviceData();
-        if (device.getName().startsWith("urn:oc:entity:santander")) {
+        if (device.getName().startsWith("urn:oc:entity:santander")
+                || device.getName().startsWith("urn:x-iot:smartsantander")) {
             //TODO: add santander owner
+            device.setProvider(santander);
         } else if (device.getName().startsWith("urn:oc:entity:london")) {
             //TODO: add london owner
+            device.setProvider(london);
         } else if (device.getName().startsWith("urn:oc:entity:aarhus")) {
             //TODO: add aarhus owner
         } else if (device.getName().startsWith("urn:oc:entity:patras:")) {
@@ -61,7 +66,7 @@ public class DeviceFactory {
             } else {
                 try {
                     DeviceSensor sensor = new DeviceSensor();
-                    sensor.setId(type.hashCode());
+                    sensor.setId(Math.abs(type.hashCode()));
                     sensor.setName(name);
                     sensor.setValue(Double.parseDouble(value));
                     sensor.setMetadata_id(type);

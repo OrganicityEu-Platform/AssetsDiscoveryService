@@ -1,9 +1,11 @@
 package eu.organicity.discovery.model;
 
+import java.io.Serializable;
+
 /**
  * Created by amaxilatis on 20/10/2015.
  */
-public class DataLocation {
+public class DataLocation implements Serializable{
     private double latitude;
     private double longitude;
     private String city;

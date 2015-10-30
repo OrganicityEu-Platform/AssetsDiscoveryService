@@ -1,9 +1,11 @@
 package eu.organicity.discovery.model;
 
+import java.io.Serializable;
+
 /**
  * Created by amaxilatis on 20/10/2015.
  */
-public class Kit {
+public class Kit implements Serializable {
     private int id;
     private String uuid;
     private String slug;

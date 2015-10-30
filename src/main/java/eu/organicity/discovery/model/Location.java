@@ -1,9 +1,11 @@
 package eu.organicity.discovery.model;
 
+import java.io.Serializable;
+
 /**
  * Created by amaxilatis on 20/10/2015.
  */
-public class Location {
+public class Location implements Serializable {
     private String city;
     private String country;
     private String country_code;

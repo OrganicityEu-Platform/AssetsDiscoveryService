@@ -1,12 +1,13 @@
 package eu.organicity.discovery.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by amaxilatis on 20/10/2015.
  */
-public class DeviceOwner {
+public class DeviceOwner implements Serializable {
     private int id;
     private String uuid;
     private String username;

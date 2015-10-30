@@ -1,12 +1,13 @@
 package eu.organicity.discovery.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by amaxilatis on 20/10/2015.
  */
-public class DeviceData {
+public class DeviceData implements Serializable {
     private String recorded_at;
     private DataLocation location;
     private List<DeviceSensor> atttributes;
