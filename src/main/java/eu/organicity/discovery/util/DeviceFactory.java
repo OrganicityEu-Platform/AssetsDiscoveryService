@@ -18,7 +18,7 @@ public class DeviceFactory {
 
     static DeviceOwner patras = new DeviceOwner(0, "urn:oc:entity:patras", "Patras", "http://www.multistick.gr/files/images/dimos_patron.png", "http://cti.gr", "", new Location("Patras", "Greece", "GR"));
     static DeviceOwner london = new DeviceOwner(0, "urn:oc:entity:london", "London", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/London", "", new Location("London", "United Kingdom", "UK"));
-    static DeviceOwner santander= new DeviceOwner(0, "urn:oc:entity:santander", "Santander", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/Santander", "", new Location("Santandeer", "Span", "ES"));
+    static DeviceOwner santander = new DeviceOwner(0, "urn:oc:entity:santander", "Santander", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/Santander", "", new Location("Santander", "Spain", "ES"));
 
     public static Device covert(OrionContextElement contextElement) {
         final Device device = new Device();
@@ -26,17 +26,13 @@ public class DeviceFactory {
         device.setUuid(contextElement.getId());
         device.setName(contextElement.getId());
         final DeviceData data = new DeviceData();
-        if (device.getName().startsWith("urn:oc:entity:santander")
-                || device.getName().startsWith("urn:x-iot:smartsantander")) {
-            //TODO: add santander owner
+        if (device.getUuid().startsWith("urn:oc:entity:santander")) {
             device.setProvider(santander);
-        } else if (device.getName().startsWith("urn:oc:entity:london")) {
-            //TODO: add london owner
+        } else if (device.getUuid().startsWith("urn:oc:entity:london")) {
             device.setProvider(london);
-        } else if (device.getName().startsWith("urn:oc:entity:aarhus")) {
+        } else if (device.getUuid().startsWith("urn:oc:entity:aarhus")) {
             //TODO: add aarhus owner
-        } else if (device.getName().startsWith("urn:oc:entity:patras:")) {
-            //TODO: add patras owner
+        } else if (device.getUuid().startsWith("urn:oc:entity:patras:")) {
             device.setProvider(patras);
         }
         device.setData(data);
