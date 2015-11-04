@@ -82,13 +82,13 @@ public class DeviceFactory {
                             }
                         }
                     }
-                    data.getAtttributes().add(sensor);
+                    data.getAttributes().add(sensor);
                 } catch (NumberFormatException e) {
                     LOGGER.warn(e.getMessage());
                 }
             }
         }
-        for (DeviceSensor deviceSensor : device.getData().getAtttributes()) {
+        for (DeviceSensor deviceSensor : device.getData().getAttributes()) {
             deviceSensor.setUpdated_at(device.getLast_reading_at());
         }
         return device;
