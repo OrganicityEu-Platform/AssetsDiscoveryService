@@ -38,7 +38,8 @@ public class OrionService {
     @PostConstruct
     public void init() {
 //        orionClient = new OrionClient("http://195.220.224.231:1026", "");
-        orionClient = new OrionClient("http://mu.tlmat.unican.es:8099", "");
+//        orionClient = new OrionClient("http://mu.tlmat.unican.es:8099", "");
+        orionClient = new OrionClient("http://54.68.181.32:1026", "", "organicity", "/");
         TimeZone tz = TimeZone.getTimeZone("UTC");
         df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
         df.setTimeZone(tz);
