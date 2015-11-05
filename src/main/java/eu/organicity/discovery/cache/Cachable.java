@@ -20,6 +20,13 @@ public @interface Cachable {
     String cacheName();
 
     /**
+     * The name of the cache to use.
+     * <p>
+     * return the name of the cache.
+     */
+    int expiration();
+
+    /**
      * If this is an evict operation.
      * <p>
      * return true if this is an evict operation.

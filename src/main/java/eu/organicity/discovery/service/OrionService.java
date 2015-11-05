@@ -7,6 +7,7 @@ import eu.organicity.discovery.cache.Cachable;
 import eu.organicity.discovery.model.Device;
 import eu.organicity.discovery.util.DeviceFactory;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -34,6 +35,8 @@ public class OrionService {
     private SimpleDateFormat df;
 
     private OrionClient orionClient;
+    @Autowired
+    DeviceService deviceService;
 
     @PostConstruct
     public void init() {
@@ -45,7 +48,7 @@ public class OrionService {
         df.setTimeZone(tz);
     }
 
-    @Cachable(cacheName = "entities")
+    @Cachable(cacheName = "entities", expiration = 1)
     public List<Device> getDevices() {
         List<Device> resources = new ArrayList<Device>();
 
@@ -53,7 +56,7 @@ public class OrionService {
             ContextElementList entities = orionClient.listContextEntities();
             for (final OrionContextElementWrapper orionContextElementWrapper : entities.getContextResponses()) {
                 try {
-                    resources.add(DeviceFactory.covert(orionContextElementWrapper.getContextElement()));
+                    resources.add(deviceService.convert(orionContextElementWrapper.getContextElement()));
                 } catch (Exception e) {
                     LOGGER.error(e, e);
                 }

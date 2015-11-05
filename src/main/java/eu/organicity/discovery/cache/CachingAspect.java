@@ -72,7 +72,7 @@ public class CachingAspect {
 
                 final String trueCacheName;
                 final String trueCacheKey;
-                int expiration = 0;
+                int expiration = thisCachename.expiration();
 
                 trueCacheName = thisCachename.cacheName();
                 trueCacheKey = objName;
