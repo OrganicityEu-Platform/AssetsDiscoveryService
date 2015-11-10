@@ -12,7 +12,7 @@ public class DeviceSensor implements Serializable {
     private String name;
     private String unit;
     private String updated_at;
-    private String metadata_id;
+    private String attributes_id;
     private double value;
     private double prev_value;
 
@@ -48,12 +48,12 @@ public class DeviceSensor implements Serializable {
         this.updated_at = updated_at;
     }
 
-    public String getMetadata_id() {
-        return metadata_id;
+    public String getAttributes_id() {
+        return attributes_id;
     }
 
-    public void setMetadata_id(String metadata_id) {
-        this.metadata_id = metadata_id;
+    public void setAttributes_id(String attributes_id) {
+        this.attributes_id = attributes_id;
     }
 
     public double getValue() {
@@ -79,7 +79,7 @@ public class DeviceSensor implements Serializable {
                 ", name='" + name + '\'' +
                 ", unit='" + unit + '\'' +
                 ", updated_at='" + updated_at + '\'' +
-                ", metadata_id='" + metadata_id + '\'' +
+                ", attributes_id='" + attributes_id + '\'' +
                 ", value=" + value +
                 ", prev_value=" + prev_value +
                 '}';

@@ -24,7 +24,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAutoConfiguration(exclude = {VelocityAutoConfiguration.class})
 public class Application implements CommandLineRunner {
 
-
     /**
      * a log4j logger to print messages.
      */

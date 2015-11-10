@@ -5,7 +5,6 @@ import com.amaxilatis.orion.model.ContextElementList;
 import com.amaxilatis.orion.model.OrionContextElementWrapper;
 import eu.organicity.discovery.cache.Cachable;
 import eu.organicity.discovery.model.Device;
-import eu.organicity.discovery.util.DeviceFactory;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,18 +48,23 @@ public class OrionService {
     }
 
     @Cachable(cacheName = "entities", expiration = 1)
-    public List<Device> getDevices() {
-        List<Device> resources = new ArrayList<Device>();
+    public List<Device> getEntities() {
+        final List<Device> resources = new ArrayList<Device>();
 
         try {
-            ContextElementList entities = orionClient.listContextEntities();
-            for (final OrionContextElementWrapper orionContextElementWrapper : entities.getContextResponses()) {
-                try {
-                    resources.add(deviceService.convert(orionContextElementWrapper.getContextElement()));
-                } catch (Exception e) {
-                    LOGGER.error(e, e);
+            ContextElementList entities;
+            long offset = 0;
+            do {
+                entities = orionClient.listContextEntities(offset);
+                offset += entities.getContextResponses().size();
+                for (final OrionContextElementWrapper orionContextElementWrapper : entities.getContextResponses()) {
+                    try {
+                        resources.add(deviceService.convert(orionContextElementWrapper.getContextElement()));
+                    } catch (Exception e) {
+                        LOGGER.error(e, e);
+                    }
                 }
-            }
+            } while (entities.hasMore(offset));
 
             return resources;
         } catch (Exception e) {
