@@ -13,12 +13,12 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * Created by amaxilatis on 20/10/2015.
+ * @author Dimitrios Amaxilatis.
  */
 public class ModelTest {
-    protected static final Logger LOGGER = Logger.getLogger(ModelTest.class);
+    private static final Logger LOGGER = Logger.getLogger(ModelTest.class);
 
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Before
     public void setUp() throws Exception {

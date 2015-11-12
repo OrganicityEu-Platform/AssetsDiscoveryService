@@ -23,7 +23,7 @@ public class CachingAspect {
      */
     private static final Logger LOGGER = Logger.getLogger(CachingAspect.class);
 
-    public static final String CACHE_NAME = "oc-";
+    private static final String CACHE_NAME = "oc-";
 
     /**
      * Connection to REDIS server.
@@ -152,11 +152,8 @@ public class CachingAspect {
      * @return the unique cache key.
      */
     private String constructCacheKey(final ProceedingJoinPoint thisJoinPoint) {
-        return new StringBuilder()
-                .append(thisJoinPoint.getSignature().getDeclaringType().getCanonicalName())
-                .append(".")
-                .append(thisJoinPoint.getSignature().getName())
-                .toString();
+        return thisJoinPoint.getSignature().getDeclaringType().getCanonicalName()
+                + "." + thisJoinPoint.getSignature().getName();
     }
 
     /**
@@ -165,7 +162,7 @@ public class CachingAspect {
      * @param joinPoint the joint point object.
      * @return string representing the arguments of this join point
      */
-    public final String getJointPointArgs(final JoinPoint joinPoint) {
+    private String getJointPointArgs(final JoinPoint joinPoint) {
         final StringBuilder buf = new StringBuilder();
 
         for (final Object arg : joinPoint.getArgs()) {

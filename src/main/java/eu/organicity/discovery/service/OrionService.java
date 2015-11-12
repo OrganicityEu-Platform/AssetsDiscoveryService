@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
@@ -31,7 +30,6 @@ public class OrionService {
      */
     private static final Logger LOGGER = Logger.getLogger(OrionService.class);
 
-    private SimpleDateFormat df;
 
     private OrionClient orionClient;
     @Autowired
@@ -42,14 +40,11 @@ public class OrionService {
 //        orionClient = new OrionClient("http://195.220.224.231:1026", "");
 //        orionClient = new OrionClient("http://mu.tlmat.unican.es:8099", "");
         orionClient = new OrionClient("http://54.68.181.32:1026", "", "organicity", "/");
-        TimeZone tz = TimeZone.getTimeZone("UTC");
-        df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        df.setTimeZone(tz);
     }
 
     @Cachable(cacheName = "entities", expiration = 1)
     public List<Device> getEntities() {
-        final List<Device> resources = new ArrayList<Device>();
+        final List<Device> resources = new ArrayList<>();
 
         try {
             ContextElementList entities;
@@ -72,6 +67,4 @@ public class OrionService {
         }
         return null;
     }
-
-    ;
 }

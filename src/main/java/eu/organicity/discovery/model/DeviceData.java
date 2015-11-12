@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by amaxilatis on 20/10/2015.
+ * @author Dimitrios Amaxilatis.
  */
 public class DeviceData implements Serializable {
     private String recorded_at;
@@ -13,7 +13,7 @@ public class DeviceData implements Serializable {
     private List<DeviceSensor> attributes;
 
     public DeviceData() {
-        this.attributes = new ArrayList<DeviceSensor>();
+        this.attributes = new ArrayList<>();
     }
 
     public String getRecorded_at() {

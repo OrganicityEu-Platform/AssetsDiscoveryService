@@ -49,8 +49,7 @@ public class RestController {
     @ResponseBody
     @RequestMapping(value = "/v1/uuid", method = RequestMethod.GET, produces = "application/json")
     public EntityId getUuid(@RequestParam(value = "id") final int id) {
-        EntityId res = (EntityId) redisTemplate.opsForHash().get("oc-uuid-val", id);
-        return res;
+        return (EntityId) redisTemplate.opsForHash().get("oc-uuid-val", id);
     }
 
 }

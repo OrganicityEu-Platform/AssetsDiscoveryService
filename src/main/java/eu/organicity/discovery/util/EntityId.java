@@ -3,8 +3,8 @@ package eu.organicity.discovery.util;
 import java.io.Serializable;
 
 public class EntityId implements Serializable {
-    int id;
-    String uuid;
+    private int id;
+    private String uuid;
 
     public EntityId() {
     }

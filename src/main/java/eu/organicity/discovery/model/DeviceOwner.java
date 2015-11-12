@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by amaxilatis on 20/10/2015.
+ * @author Dimitrios Amaxilatis.
  */
 public class DeviceOwner implements Serializable {
     private int id;
@@ -28,7 +28,7 @@ public class DeviceOwner implements Serializable {
         this.url = url;
         this.joined_at = joined_at;
         this.location = location;
-        this.device_ids = new ArrayList<Integer>();
+        this.device_ids = new ArrayList<>();
     }
 
     public int getId() {

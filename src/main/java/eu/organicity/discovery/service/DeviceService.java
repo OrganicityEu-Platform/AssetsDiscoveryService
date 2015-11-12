@@ -29,9 +29,9 @@ public class DeviceService {
      */
     private static final Logger LOGGER = Logger.getLogger(DeviceService.class);
 
-    static DeviceOwner patras = new DeviceOwner(0, "urn:oc:entity:patras", "Patras", "http://www.multistick.gr/files/images/dimos_patron.png", "http://cti.gr", "", new Location("Patras", "Greece", "GR"));
-    static DeviceOwner london = new DeviceOwner(0, "urn:oc:entity:london", "London", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/London", "", new Location("London", "United Kingdom", "UK"));
-    static DeviceOwner santander = new DeviceOwner(0, "urn:oc:entity:santander", "Santander", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/Santander", "", new Location("Santander", "Spain", "ES"));
+    private static final DeviceOwner patras = new DeviceOwner(0, "urn:oc:entity:patras", "Patras", "http://www.multistick.gr/files/images/dimos_patron.png", "http://cti.gr", "", new Location("Patras", "Greece", "GR"));
+    private static final DeviceOwner london = new DeviceOwner(0, "urn:oc:entity:london", "London", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/London", "", new Location("London", "United Kingdom", "UK"));
+    private static final DeviceOwner santander = new DeviceOwner(0, "urn:oc:entity:santander", "Santander", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/Santander", "", new Location("Santander", "Spain", "ES"));
 
     private SimpleDateFormat df;
 
@@ -88,17 +88,17 @@ public class DeviceService {
                 device.setLast_reading_at(value);
             } else {
                 try {
-                    DeviceSensor sensor = new DeviceSensor();
-                    sensor.setId(Math.abs(type.hashCode()));
+                    final EntityId sensorId = deviceFactory.getId(type);
+                    final DeviceSensor sensor = new DeviceSensor();
+                    sensor.setId(sensorId.getId());
                     sensor.setName(name);
                     sensor.setValue(Double.parseDouble(value));
-                    sensor.setAttributes_id(type);
+                    sensor.setAttributes_id(sensorId.getUuid());
                     if (stringObjectMap.containsKey("metadatas")) {
                         ArrayList<Map<String, Object>> metadatas = (ArrayList<Map<String, Object>>) stringObjectMap.get("metadatas");
                         for (Map<String, Object> metadata : metadatas) {
                             LOGGER.info("metadata:" + metadata);
                             String metadataName = (String) metadata.get("name");
-                            String metadataType = (String) metadata.get("type");
                             String metadataValue = (String) metadata.get("value");
                             if (metadataName.equals("unit")) {
                                 sensor.setUnit(metadataValue);
