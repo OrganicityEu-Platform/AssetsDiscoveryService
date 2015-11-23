@@ -5,6 +5,8 @@ language: java
 jdk:
   - oraclejdk8
 
+install: true
+
 script: mvn clean install -DskipTests=true
 
 after_script: rsync -a -e "ssh -o StrictHostKeyChecking=no" target/discovery-*.jar dimitrios@ec2-54-68-181-32.us-west-2.compute.amazonaws.com:/home/dimitrios/discovery/
