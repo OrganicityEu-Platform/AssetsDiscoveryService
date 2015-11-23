@@ -32,6 +32,7 @@ public class DeviceService {
     private static final DeviceOwner patras = new DeviceOwner(0, "urn:oc:entity:patras", "Patras", "http://www.multistick.gr/files/images/dimos_patron.png", "http://cti.gr", "", new Location("Patras", "Greece", "GR"));
     private static final DeviceOwner london = new DeviceOwner(0, "urn:oc:entity:london", "London", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/London", "", new Location("London", "United Kingdom", "UK"));
     private static final DeviceOwner santander = new DeviceOwner(0, "urn:oc:entity:santander", "Santander", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/Santander", "", new Location("Santander", "Spain", "ES"));
+    private static final DeviceOwner aarhus = new DeviceOwner(0, "urn:oc:entity:aarhus", "Aarhus", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "http://sw-dev.alexandra.dk/oc-history-service-aak/v1/entities", "", new Location("Aarhus", "Denmark", "DK"));
 
     private SimpleDateFormat df;
 
@@ -59,6 +60,7 @@ public class DeviceService {
             device.setProvider(london);
         } else if (device.getUuid().startsWith("urn:oc:entity:aarhus")) {
             //TODO: add aarhus owner
+            device.setProvider(aarhus);
         } else if (device.getUuid().startsWith("urn:oc:entity:patras:")) {
             device.setProvider(patras);
         }
