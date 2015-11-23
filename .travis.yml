@@ -1,0 +1,7 @@
+language: java
+jdk:
+  - oraclejdk8
+
+script: mvn install -DskipTests=true
+
+after_script: sshpass -p '$SPG' scp target/discovery-*.jar discovery@ec2-54-68-181-32.us-west-2.compute.amazonaws.com:/home/dimitrios/discovery/ -
