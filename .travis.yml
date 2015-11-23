@@ -7,4 +7,4 @@ jdk:
 
 script: mvn install -DskipTests=true
 
-after_script: rsync -azP -e "ssh -o StrictHostKeyChecking=no" target/discovery-*.jar discovery@ec2-54-68-181-32.us-west-2.compute.amazonaws.com:/home/dimitrios/discovery/
+after_script: rsync -azP -e "ssh -o StrictHostKeyChecking=no" target/discovery-*.jar dimitrios@ec2-54-68-181-32.us-west-2.compute.amazonaws.com:/home/dimitrios/discovery/
