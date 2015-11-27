@@ -33,7 +33,7 @@ public class OrionService {
 
 
     private OrionClient centralOrion = new OrionClient("http://54.68.181.32:1026", "", "organicity", "/");
-    private OrionClient orionClientLondon = null;// new OrionClient("http://195.220.224.231:1026", "", "organicity", "/");
+    private OrionClient orionClientLondon = new OrionClient("http://146.169.46.162:1026/", "", "organicity", "/");
     private OrionClient orionSantander = new OrionClient("http://mu.tlmat.unican.es:8099", "", "organicity", "/");
     private OrionClient orionSmartphones = new OrionClient("http://195.220.224.231:1026", "", "organicity", "/");
 
@@ -79,7 +79,12 @@ public class OrionService {
             offset += entities.getContextResponses().size();
             for (final OrionContextElementWrapper orionContextElementWrapper : entities.getContextResponses()) {
                 try {
-                    resources.add(deviceService.convert(orionContextElementWrapper.getContextElement()));
+                    Device device = deviceService.convert(orionContextElementWrapper.getContextElement());
+                    if (device.getProvider() != null) {
+                        resources.add(device);
+                    } else {
+                        LOGGER.warn(orionContextElementWrapper.getContextElement().getId() + " has no provider!");
+                    }
                 } catch (Exception e) {
                     LOGGER.error(e, e);
                 }
