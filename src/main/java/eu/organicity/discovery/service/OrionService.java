@@ -36,7 +36,7 @@ public class OrionService {
     private static OrionClient orionClientLondon = new OrionClient("http://146.169.46.162:1026/", "", "organicity", "/");
     private static OrionClient orionSantander = new OrionClient("http://mu.tlmat.unican.es:8099", "", "organicity", "/");
     private static OrionClient orionSmartphones = new OrionClient("http://195.220.224.231:1026", "", "organicity", "/");
-    private static String ckanEntitiesPatras = "http://150.140.5.11:9998/v0/devices";
+    private static String ckanEntitiesPatras = "http://150.140.5.11:9998/v0/entities";
 
     @Autowired
     DeviceService deviceService;
