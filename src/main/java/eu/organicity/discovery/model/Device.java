@@ -1,6 +1,7 @@
 package eu.organicity.discovery.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 
@@ -8,11 +9,13 @@ import java.io.Serializable;
  * @author Dimitrios Amaxilatis.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Device implements Serializable {
     private long id;
     private String uuid;
     private String name;
     private String last_reading_at;
+    private String description;
     private DeviceOwner provider;
     private DeviceData data;
     private Kit entities_type;
@@ -47,6 +50,14 @@ public class Device implements Serializable {
 
     public void setLast_reading_at(String last_reading_at) {
         this.last_reading_at = last_reading_at;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public DeviceOwner getProvider() {
