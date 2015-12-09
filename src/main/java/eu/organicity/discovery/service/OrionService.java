@@ -32,11 +32,11 @@ public class OrionService {
     private static final Logger LOGGER = Logger.getLogger(OrionService.class);
 
 
-    private OrionClient centralOrion = new OrionClient("http://54.68.181.32:1026", "", "organicity", "/");
-    private OrionClient orionClientLondon = new OrionClient("http://146.169.46.162:1026/", "", "organicity", "/");
-    private OrionClient orionSantander = new OrionClient("http://mu.tlmat.unican.es:8099", "", "organicity", "/");
-    private OrionClient orionSmartphones = new OrionClient("http://195.220.224.231:1026", "", "organicity", "/");
-    private String ckanEntities = "http://150.140.5.11:9998/v0/devices";
+    private static OrionClient centralOrion = new OrionClient("http://54.68.181.32:1026", "", "organicity", "/");
+    private static OrionClient orionClientLondon = new OrionClient("http://146.169.46.162:1026/", "", "organicity", "/");
+    private static OrionClient orionSantander = new OrionClient("http://mu.tlmat.unican.es:8099", "", "organicity", "/");
+    private static OrionClient orionSmartphones = new OrionClient("http://195.220.224.231:1026", "", "organicity", "/");
+    private static String ckanEntitiesPatras = "http://150.140.5.11:9998/v0/devices";
 
     @Autowired
     DeviceService deviceService;
@@ -49,32 +49,33 @@ public class OrionService {
             findAll(resources, centralOrion);
         } catch (Exception e1) {
             LOGGER.warn("Could not connect to Central");
-        try {
-            findAll(resources, orionClientLondon);
-        } catch (Exception ignore) {
-            LOGGER.warn("Could not connect to London");
+            try {
+                findAll(resources, orionClientLondon);
+            } catch (Exception ignore) {
+                LOGGER.warn("Could not connect to London");
+            }
+//        try {
+//            findAll(resources, orionSantander);
+//        } catch (Exception ignore) {
+//            LOGGER.warn("Could not connect to Santander");
+//        }
+            try {
+                findAll(resources, orionSmartphones);
+            } catch (Exception ignore) {
+                LOGGER.warn("Could not connect to Smartphones");
+            }
         }
         try {
-            findAll(resources, orionSantander);
-        } catch (Exception ignore) {
-            LOGGER.warn("Could not connect to Santander");
-        }
-        try {
-            findAll(resources, orionSmartphones);
-        } catch (Exception ignore) {
-            LOGGER.warn("Could not connect to Smartphones");
-        }
-        try {
-            findAll(resources, ckanEntities);
+            findAll(resources, ckanEntitiesPatras);
         } catch (Exception e) {
             LOGGER.warn("Could not connect to ckan", e);
-        }
         }
         return resources;
     }
 
 
-    private void findAll(List<Device> resources, final OrionClient client) throws Exception {
+    private void findAll(final List<Device> resources, final OrionClient client) throws Exception {
+        final long start = System.currentTimeMillis();
         if (client == null) {
             return;
         }
@@ -99,17 +100,20 @@ public class OrionService {
                 }
             }
         } while (entities.hasMore(offset));
+        LOGGER.info("[" + client + "]Took: " + (System.currentTimeMillis() - start));
     }
 
-    private void findAll(List<Device> resources, final String url) throws Exception {
+    private void findAll(final List<Device> resources, final String url) throws Exception {
+        final long start = System.currentTimeMillis();
 
-        List<Device> entities = new ObjectMapper().readValue(new URL(url), new TypeReference<List<Device>>() {
+        final List<Device> entities = new ObjectMapper().readValue(new URL(url), new TypeReference<List<Device>>() {
         });
-        for (Device entity : entities) {
+        for (final Device entity : entities) {
             if (entity.getData().getLocation().getLatitude() == 0 || entity.getData().getLocation().getLongitude() == 0) {
             } else {
                 resources.add(entity);
             }
         }
+        LOGGER.info("[" + url + "]Took: " + (System.currentTimeMillis() - start));
     }
 }
