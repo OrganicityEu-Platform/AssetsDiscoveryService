@@ -30,18 +30,12 @@ public class RestController {
     @Autowired
     DeviceFactory deviceFactory;
 
-    private List<Device> storedEntitiesResponse;
-
     @ResponseBody
     @RequestMapping(value = "/v1/entities", method = RequestMethod.GET, produces = "application/json")
     public List<Device> getDevices() {
-        try {
-            final List<Device> entitiesResponse = orionService.getEntities();
-            storedEntitiesResponse = entitiesResponse;
-            return entitiesResponse;
-        } catch (Exception e) {
-            return storedEntitiesResponse;
-        }
+        final List<Device> entitiesResponse = orionService.getEntities();
+        return entitiesResponse;
+
     }
 
     @ResponseBody

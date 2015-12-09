@@ -1,12 +1,15 @@
 package eu.organicity.discovery.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 /**
  * @author Dimitrios Amaxilatis.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Device implements Serializable {
-    private int id;
+    private long id;
     private String uuid;
     private String name;
     private String last_reading_at;
@@ -14,11 +17,11 @@ public class Device implements Serializable {
     private DeviceData data;
     private Kit entities_type;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

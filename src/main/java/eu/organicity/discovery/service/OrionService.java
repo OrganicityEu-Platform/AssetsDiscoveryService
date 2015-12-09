@@ -3,15 +3,15 @@ package eu.organicity.discovery.service;
 import com.amaxilatis.orion.OrionClient;
 import com.amaxilatis.orion.model.ContextElementList;
 import com.amaxilatis.orion.model.OrionContextElementWrapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.organicity.discovery.cache.Cachable;
 import eu.organicity.discovery.model.Device;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.ws.rs.ProcessingException;
-import java.net.ConnectException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +36,7 @@ public class OrionService {
     private OrionClient orionClientLondon = new OrionClient("http://146.169.46.162:1026/", "", "organicity", "/");
     private OrionClient orionSantander = new OrionClient("http://mu.tlmat.unican.es:8099", "", "organicity", "/");
     private OrionClient orionSmartphones = new OrionClient("http://195.220.224.231:1026", "", "organicity", "/");
+    private String ckanEntities = "http://150.140.5.11:9998/v0/devices";
 
     @Autowired
     DeviceService deviceService;
@@ -48,21 +49,26 @@ public class OrionService {
             findAll(resources, centralOrion);
         } catch (Exception e1) {
             LOGGER.warn("Could not connect to Central");
-            try {
-                findAll(resources, orionClientLondon);
-            } catch (Exception ignore) {
-                LOGGER.warn("Could not connect to London");
-            }
-            try {
-                findAll(resources, orionSantander);
-            } catch (Exception ignore) {
-                LOGGER.warn("Could not connect to Santander");
-            }
-            try {
-                findAll(resources, orionSmartphones);
-            } catch (Exception ignore) {
-                LOGGER.warn("Could not connect to Smartphones");
-            }
+        try {
+            findAll(resources, orionClientLondon);
+        } catch (Exception ignore) {
+            LOGGER.warn("Could not connect to London");
+        }
+        try {
+            findAll(resources, orionSantander);
+        } catch (Exception ignore) {
+            LOGGER.warn("Could not connect to Santander");
+        }
+        try {
+            findAll(resources, orionSmartphones);
+        } catch (Exception ignore) {
+            LOGGER.warn("Could not connect to Smartphones");
+        }
+        try {
+            findAll(resources, ckanEntities);
+        } catch (Exception e) {
+            LOGGER.warn("Could not connect to ckan", e);
+        }
         }
         return resources;
     }
@@ -81,7 +87,10 @@ public class OrionService {
                 try {
                     Device device = deviceService.convert(orionContextElementWrapper.getContextElement());
                     if (device.getProvider() != null) {
-                        resources.add(device);
+                        if (device.getData().getLocation().getLatitude() == 0 || device.getData().getLocation().getLongitude() == 0) {
+                        } else {
+                            resources.add(device);
+                        }
                     } else {
                         LOGGER.warn(orionContextElementWrapper.getContextElement().getId() + " has no provider!");
                     }
@@ -90,5 +99,17 @@ public class OrionService {
                 }
             }
         } while (entities.hasMore(offset));
+    }
+
+    private void findAll(List<Device> resources, final String url) throws Exception {
+
+        List<Device> entities = new ObjectMapper().readValue(new URL(url), new TypeReference<List<Device>>() {
+        });
+        for (Device entity : entities) {
+            if (entity.getData().getLocation().getLatitude() == 0 || entity.getData().getLocation().getLongitude() == 0) {
+            } else {
+                resources.add(entity);
+            }
+        }
     }
 }
