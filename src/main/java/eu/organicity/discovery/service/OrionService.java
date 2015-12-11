@@ -54,11 +54,11 @@ public class OrionService {
             } catch (Exception ignore) {
                 LOGGER.warn("Could not connect to London");
             }
-//        try {
-//            findAll(resources, orionSantander);
-//        } catch (Exception ignore) {
-//            LOGGER.warn("Could not connect to Santander");
-//        }
+            try {
+                findAll(resources, orionSantander);
+            } catch (Exception ignore) {
+                LOGGER.warn("Could not connect to Santander");
+            }
             try {
                 findAll(resources, orionSmartphones);
             } catch (Exception ignore) {
