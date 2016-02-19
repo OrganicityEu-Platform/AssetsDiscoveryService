@@ -33,6 +33,7 @@ public class DeviceService {
     private static final DeviceOwner london = new DeviceOwner(0, "urn:oc:entity:london", "London", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/London", "", new Location("London", "United Kingdom", "UK"));
     private static final DeviceOwner santander = new DeviceOwner(0, "urn:oc:entity:santander", "Santander", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "https://en.wikipedia.org/wiki/Santander", "", new Location("Santander", "Spain", "ES"));
     private static final DeviceOwner aarhus = new DeviceOwner(0, "urn:oc:entity:aarhus", "Aarhus", "http://cliparts.co/cliparts/LTd/jL4/LTdjL4djc.jpg", "http://sw-dev.alexandra.dk/oc-history-service-aak/v1/entities", "", new Location("Aarhus", "Denmark", "DK"));
+    private static final DeviceOwner experimenter = new DeviceOwner(0, "urn:oc:entity:experimenter", "Experimenter", "http://dkdev.co/construction-hard-hat.jpg", "http://organicity.eu", "", new Location("Brussels", "Belgium", "BE"));
 
     private SimpleDateFormat df;
 
@@ -63,6 +64,8 @@ public class DeviceService {
             device.setProvider(aarhus);
         } else if (device.getUuid().startsWith("urn:oc:entity:patra:")) {
             device.setProvider(patras);
+        } else if (device.getUuid().startsWith("urn:oc:entity:experimenter:")) {
+            device.setProvider(experimenter);
         }
         device.setData(data);
         final DataLocation location = new DataLocation();
