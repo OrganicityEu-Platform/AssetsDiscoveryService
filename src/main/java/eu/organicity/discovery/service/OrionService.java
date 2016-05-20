@@ -32,7 +32,7 @@ public class OrionService {
     private static final Logger LOGGER = Logger.getLogger(OrionService.class);
 
 
-    private static OrionClient centralOrion = new OrionClient("http://54.68.181.32:1026", "", "organicity", "/");
+    private static OrionClient centralOrion = new OrionClient("http://ec2-52-40-19-99.us-west-2.compute.amazonaws.com:1026/", "", "organicity", "/");
     private static OrionClient orionClientLondon = new OrionClient("http://146.169.46.162:1026/", "", "organicity", "/");
     private static OrionClient orionSantander = new OrionClient("http://mu.tlmat.unican.es:8099", "", "organicity", "/");
     private static OrionClient orionSmartphones = new OrionClient("http://195.220.224.231:1026", "", "organicity", "/");
@@ -49,27 +49,27 @@ public class OrionService {
             findAll(resources, centralOrion);
         } catch (Exception e1) {
             LOGGER.warn("Could not connect to Central");
-            try {
-                findAll(resources, orionClientLondon);
-            } catch (Exception ignore) {
-                LOGGER.warn("Could not connect to London");
-            }
 //            try {
-//                findAll(resources, orionSantander);
+//                findAll(resources, orionClientLondon);
 //            } catch (Exception ignore) {
-//                LOGGER.warn("Could not connect to Santander");
+//                LOGGER.warn("Could not connect to London");
 //            }
-            try {
-                findAll(resources, orionSmartphones);
-            } catch (Exception ignore) {
-                LOGGER.warn("Could not connect to Smartphones");
-            }
+////            try {
+////                findAll(resources, orionSantander);
+////            } catch (Exception ignore) {
+////                LOGGER.warn("Could not connect to Santander");
+////            }
+//            try {
+//                findAll(resources, orionSmartphones);
+//            } catch (Exception ignore) {
+//                LOGGER.warn("Could not connect to Smartphones");
+//            }
         }
-        try {
-            findAll(resources, ckanEntitiesPatras);
-        } catch (Exception e) {
-            LOGGER.warn("Could not connect to ckan", e);
-        }
+//        try {
+//            findAll(resources, ckanEntitiesPatras);
+//        } catch (Exception e) {
+//            LOGGER.warn("Could not connect to ckan", e);
+//        }
         return resources;
     }
 
